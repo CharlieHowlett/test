@@ -7,7 +7,7 @@
 -- Activity
 
 SELECT PRS_PRIORITY_GROUP
-	/* Split Priority Groups by age etc...  Age based on 31/03/2023 */
+--	/* Split Priority Groups by age etc...  Age based on 31/03/2023 */
    ,CASE
 		when [PRS_PRIORITY_GROUP] = 'P0.1' Then 'P00.1 Severely Immunosuppressed (Scheduled)'                   
 		when [PRS_PRIORITY_GROUP] = 'P0.2' Then 'P00.2 Severely Immunosuppressed (Manual)' 
@@ -69,17 +69,17 @@ SELECT PRS_PRIORITY_GROUP
 				 PRS_DATE_OF_BIRTH) > '2023-03-31') THEN - 1 ELSE 0 END between 5 AND 11
 			and VACC_DATE_OF_VACCINE >= '2022-01-17 00:00:00.000' 
 			and PRS_PRIORITY_GROUP IN ('P6','P0.1','P0.2','P0.3')
-			THEN 'Aged 5-11 years children' /* At risk 5-11yrs */
+			THEN 'Aged 5-11 years children' --/* At risk 5-11yrs */
 		WHEN DATEDIFF(YY, PRS_DATE_OF_BIRTH, '2023-03-31') + CASE WHEN (DATEADD(YY,2023-DATEPART(YY, PRS_DATE_OF_BIRTH),
 				 PRS_DATE_OF_BIRTH) > '2023-03-31') THEN - 1 ELSE 0 END between 5 AND 11
 			and VACC_DATE_OF_VACCINE >= '2022-03-07 00:00:00.000'
 			and PRS_PRIORITY_GROUP = 'P10'
 			AND CAST(PRS_DATE_OF_BIRTH as date) <= '2017-08-31'
-			THEN 'Aged 5-11 years children'	/* healthy 5-11yrs */
+			THEN 'Aged 5-11 years children'	--/* healthy 5-11yrs */
 		WHEN DOSE_SEQUENCE not in ('1','2','3') 
 			and VACC_DATE_OF_VACCINE >= '2022-09-01 00:00:00.000' 
 			AND [PRS_PRIORITY_GROUP] NOT IN ('P10')
-			THEN 'Autumn Booster'  /* Autumn Booster */
+			THEN 'Autumn Booster'  --/* Autumn Booster */
 		WHEN VACC_DATE_OF_VACCINE >= '2022-09-01 00:00:00.000'
 			AND (
 				(DOSE_SEQUENCE IN ('1','2') AND CAST(PRS_DATE_OF_BIRTH as date) <= '2017-08-31')
@@ -174,17 +174,17 @@ GROUP BY PRS_PRIORITY_GROUP
 				 PRS_DATE_OF_BIRTH) > '2023-03-31') THEN - 1 ELSE 0 END between 5 AND 11
 			and VACC_DATE_OF_VACCINE >= '2022-01-17 00:00:00.000' 
 			and PRS_PRIORITY_GROUP IN ('P6','P0.1','P0.2','P0.3')
-			THEN 'Aged 5-11 years children' /* At risk 5-11yrs */
+			THEN 'Aged 5-11 years children' --/* At risk 5-11yrs */
 		WHEN DATEDIFF(YY, PRS_DATE_OF_BIRTH, '2023-03-31') + CASE WHEN (DATEADD(YY,2023-DATEPART(YY, PRS_DATE_OF_BIRTH),
 				 PRS_DATE_OF_BIRTH) > '2023-03-31') THEN - 1 ELSE 0 END between 5 AND 11
 			and VACC_DATE_OF_VACCINE >= '2022-03-07 00:00:00.000'
 			and PRS_PRIORITY_GROUP = 'P10'
 			AND CAST(PRS_DATE_OF_BIRTH as date) <= '2017-08-31'
-			THEN 'Aged 5-11 years children'	/* healthy 5-11yrs */
+			THEN 'Aged 5-11 years children'	--/* healthy 5-11yrs */
 		WHEN DOSE_SEQUENCE not in ('1','2','3') 
 			and VACC_DATE_OF_VACCINE >= '2022-09-01 00:00:00.000' 
 			AND [PRS_PRIORITY_GROUP] NOT IN ('P10')
-			THEN 'Autumn Booster'  /* Autumn Booster */
+			THEN 'Autumn Booster'  --/* Autumn Booster */
 		WHEN VACC_DATE_OF_VACCINE >= '2022-09-01 00:00:00.000'
 			AND (
 				(DOSE_SEQUENCE IN ('1','2') AND CAST(PRS_DATE_OF_BIRTH as date) <= '2017-08-31')
